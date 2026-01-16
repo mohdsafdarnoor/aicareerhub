@@ -1730,7 +1730,6 @@
     const formMessage = document.getElementById('form-message');
     const submitBtn = form.querySelector('.submit-btn');
     
-    // Show sending message
     formMessage.style.display = 'block';
     formMessage.className = 'form-message';
     formMessage.textContent = currentLang === 'en' ? 'Sending...' : 'Wird gesendet...';
@@ -1747,20 +1746,20 @@
         if (response.ok) {
             formMessage.className = 'form-message success';
             formMessage.textContent = currentLang === 'en' ? 
-                '✓ Success! Your message has been sent. We will get back to you soon.' : 
-                '✓ Erfolg! Ihre Nachricht wurde gesendet. Wir werden uns bald bei Ihnen melden.';
+                '✓ Success! Your message has been sent.' : 
+                '✓ Erfolg! Ihre Nachricht wurde gesendet.';
             form.reset();
         } else {
             throw new Error('Server error');
         }
     } catch (error) {
-        formMessage.className = 'form-message';
+        formMessage.style.display = 'block';
         formMessage.style.background = 'rgba(255, 0, 110, 0.2)';
         formMessage.style.borderColor = 'var(--accent-pink)';
         formMessage.style.color = 'var(--accent-pink)';
         formMessage.textContent = currentLang === 'en' ? 
-            '⚠ Oops! Something went wrong. Please try again.' : 
-            '⚠ Hoppla! Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.';
+            '⚠ Error. Please try again.' : 
+            '⚠ Fehler. Bitte versuchen Sie es erneut.';
     } finally {
         submitBtn.disabled = false;
     }
